@@ -52,3 +52,13 @@ class JavaSourceAnalyzer:
         "interface_declaration",
         "record_declaration"
     }
+
+    def analyze(self, source_code: bytes) -> dict:
+        tree = self.parser.parse(source_code)
+        root_node = tree.root_node
+        return {
+            "packages": self.extract_package_name(root_node= root_node),
+            "classes": self.extract_class_names(root_node= root_node),
+            "imports": self.extract_import_names(root_node=root_node),
+            "methods": self.extract_method_names(root_node=root_node)
+        }

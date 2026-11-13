@@ -36,14 +36,9 @@ analyzer = JavaSourceAnalyzer()
 tree = analyzer.parser.parse(source_code)
 root_node = tree.root_node
 
-print("PACKAGE:")
-print(analyzer.extract_package_name(root_node))
+analyzer = JavaSourceAnalyzer()
 
-print("\nCLASSES:")
-print(analyzer.extract_class_names(root_node))
+metadata = analyzer.analyze(source_code)
 
-print("\nMETHODS:")
-print(analyzer.extract_method_names(root_node))
-
-print("\nIMPORTS:")
-print(analyzer.extract_import_names(root_node))
+for key, value in metadata.items():
+    print(f"{key}: {value}")
